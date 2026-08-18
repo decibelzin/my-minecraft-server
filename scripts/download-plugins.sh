@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Baixa os plugins com versao e checksum fixados.
+#
+#   ./scripts/download-plugins.sh
+#
+# Roda no Git Bash (Windows) e na VPS. Os .jar ficam fora do git, entao
+# e este arquivo que torna a instalacao reproduzivel: uma VPS nova recebe
+# exatamente os mesmos plugins, verificados por SHA-512.
+#
+# Para atualizar um plugin, troque a linha correspondente em PLUGINS.
+# Os dados saem da API do Modrinth:
+#   curl -s "https://api.modrinth.com/v2/project/<slug>/version?game_versions=%5B%2226.2%22%5D&loaders=%5B%22paper%22%5D"
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+DEST=data/plugins
+
+# formato: arquivo|url|sha512
+PLUGINS="
+LoginTo-3.8.1.jar|https://cdn.modrinth.com/data/A5foNgax/versions/r0FkwIn3/LoginTo-3.8.1.jar|cffdd118654fac01d952d52b3096c5b8bc34da739ee2906520c0087f487aa93b8ef96770af1d683adc41802e434c100d4eff0c4055b57c20e9a5fc2d8413d154
+SkinsRestorer.jar|https://cdn.modrinth.com/data/TsLS8Py5/versions/wXS6bHiC/SkinsRestorer.jar|7819f6b1e8f8ddb2e86d3d3e54352dd040f381e9a094f8a9c80c7d3273ffd7b1cef6eca7369dcee4b0f5290e7837ef51cee1baeca906b3784f30d7ba2f58b7b4
+"
+
+mkdir -p "$DEST"
+
+conferir() {
+  # $1 = arquivo, $2 = sha512 esperado
+  [ -f "$1" ] || return 1
+  local atual
+  atual="$(sha512sum "$1" | cut -d' ' -f1)"
+  [ "$atual" = "$2" ]
+}
+
+echo "$PLUGINS" | while IFS='|' read -r nome url hash; do
+  [ -z "${nome:-}" ] && continue
+  alvo="$DEST/$nome"
+
+  if conferir "$alvo" "$hash"; then
+    echo "[ok] $nome ja presente, checksum confere"
+    continue
+  fi
+
+  echo "[..] baixando $nome"
+  curl -fsSL -o "$alvo.parcial" "$url"
+
+  if ! conferir "$alvo.parcial" "$hash"; then
+    rm -f "$alvo.parcial"
+    echo "[ERRO] checksum de $nome nao confere. Arquivo descartado." >&2
+    exit 1
+  fi
+
+  mv "$alvo.parcial" "$alvo"
+  echo "[ok] $nome verificado ($(du -h "$alvo" | cut -f1))"
+done
+
+# O servidor roda como uid 1000 no container; sem isto ele nao le os jars
+# nem cria as pastas de config dos plugins.
+if [ "$(id -u)" = "0" ]; then
+  chown -R 1000:1000 "$DEST"
+  echo "[ok] dono de $DEST ajustado para 1000:1000"
+fi
+
+echo
+echo "Plugins instalados em $DEST:"
+ls -1 "$DEST"/*.jar 2>/dev/null | sed 's|.*/|  - |'
