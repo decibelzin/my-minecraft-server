@@ -1,0 +1,12 @@
+# Runtime do servidor: mundo, logs, plugins, libraries e as configs
+# geradas pelo Paper. Backup e feito por scripts/backup-world.sh.
+data/
+
+# Binario do Paper - baixado por scripts/download-server.ps1
+*.jar
+
+# Backups compactados
+backups/
+
+# Segredos e ajustes locais da maquina
+.env

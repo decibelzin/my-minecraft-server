@@ -1,0 +1,11 @@
+# Forca LF em tudo que roda dentro do container.
+# Sem isso, um clone no Windows converte para CRLF e o entrypoint
+# morre com "bad interpreter: /usr/bin/env bash^M".
+* text=auto eol=lf
+*.sh   text eol=lf
+*.yml  text eol=lf
+Dockerfile   text eol=lf
+
+*.jar binary
+*.zip binary
+*.tar.gz binary

@@ -1,0 +1,13 @@
+# O contexto de build so precisa do server.properties e do docker/.
+# Tudo que segue fica de fora - inclusive data/, que tem centenas de MB
+# de mundo e libraries e tornaria cada build lentissimo.
+.git
+.gitignore
+.gitattributes
+data/
+backups/
+*.jar
+*.zip
+.env
+README.md
+scripts/
