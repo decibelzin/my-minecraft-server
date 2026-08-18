@@ -36,9 +36,17 @@ LABEL org.opencontainers.image.title="my-minecraft-server" \
       org.opencontainers.image.description="Servidor Paper containerizado" \
       org.opencontainers.image.source="https://github.com/decibelzin/my-minecraft-server"
 
-# uid/gid fixos: facilitam o chown do volume na VPS
-RUN groupadd --gid 1000 minecraft \
- && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash minecraft
+# uid/gid 1000 fixos: facilitam o chown do volume bind-montado na VPS.
+# A imagem Ubuntu ja traz um usuario "ubuntu" ocupando 1000:1000, entao
+# criamos apenas se estiver livre. O USER usa o id numerico, que vale
+# nos dois casos sem depender do nome.
+RUN set -eux; \
+    if ! getent group 1000 >/dev/null; then \
+      groupadd --gid 1000 minecraft; \
+    fi; \
+    if ! getent passwd 1000 >/dev/null; then \
+      useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash minecraft; \
+    fi
 
 COPY --from=fetch /paper.jar /opt/paper.jar
 
@@ -50,9 +58,9 @@ COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh \
  && mkdir -p /data \
- && chown -R minecraft:minecraft /data /opt/defaults
+ && chown -R 1000:1000 /data /opt/defaults
 
-USER minecraft
+USER 1000:1000
 WORKDIR /data
 
 # Minecraft Java Edition e TCP. UDP so serviria para enable-query,
