@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Aplica na VPS o que foi enviado ao repositorio.
+#
+#   ./scripts/deploy.sh
+#
+# Decide sozinho entre restart e rebuild, porque a escolha errada faz a
+# mudanca simplesmente nao aparecer - e isso e dificil de perceber.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+ANTES="$(git rev-parse HEAD)"
+echo "[deploy] buscando atualizacoes..."
+git pull --ff-only -q
+DEPOIS="$(git rev-parse HEAD)"
+
+if [ "$ANTES" = "$DEPOIS" ]; then
+  echo "[deploy] repositorio ja estava atualizado ($(git log --oneline -1))"
+  echo "[deploy] nada a fazer."
+  exit 0
+fi
+
+echo "[deploy] $(git log --oneline -1)"
+MUDOU="$(git diff --name-only "$ANTES" "$DEPOIS")"
+echo "[deploy] arquivos alterados:"
+echo "$MUDOU" | sed 's/^/           /'
+echo
+
+# Lista de plugins mudou: baixa antes de subir, senao o servidor sobe sem eles
+if echo "$MUDOU" | grep -q '^scripts/download-plugins.sh$'; then
+  echo "[deploy] lista de plugins mudou, sincronizando..."
+  ./scripts/download-plugins.sh
+  echo
+fi
+
+# Dockerfile e entrypoint vivem dentro da imagem: exigem rebuild.
+# server.properties e plugins-config vem do mount somente-leitura,
+# entao para eles um restart basta.
+if echo "$MUDOU" | grep -qE '^(Dockerfile|docker/entrypoint.sh|docker-compose.yml)$'; then
+  echo "[deploy] a imagem mudou -> rebuild"
+  docker compose up -d --build
+else
+  echo "[deploy] apenas configuracao -> restart"
+  docker compose restart
+fi
+
+echo
+echo "[deploy] aguardando o servidor ficar saudavel..."
+for i in $(seq 1 40); do
+  estado="$(docker inspect --format '{{.State.Health.Status}}' minecraft 2>/dev/null || echo desconhecido)"
+  if [ "$estado" = "healthy" ]; then
+    echo "[deploy] pronto: $(docker compose logs --tail 300 2>/dev/null | grep -oE 'Done \([0-9.]+s\)!' | tail -1)"
+    exit 0
+  fi
+  if [ "$estado" = "unhealthy" ]; then
+    echo "[deploy] ERRO: container unhealthy. Ultimas linhas:" >&2
+    docker compose logs --tail 25 >&2
+    exit 1
+  fi
+  sleep 6
+done
+
+echo "[deploy] AVISO: nao ficou healthy em 4 minutos. Ultimas linhas:" >&2
+docker compose logs --tail 25 >&2
+exit 1

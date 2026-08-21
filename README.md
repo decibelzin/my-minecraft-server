@@ -125,6 +125,36 @@ isso com o servidor aberto permite qualquer um entrar com qualquer nick.
 
 ---
 
+## Aplicar mudancas na VPS
+
+O ciclo e sempre o mesmo: edita na sua maquina, commita, envia, e a VPS puxa.
+
+```
+edita no Windows -> commit -> push -> deploy na VPS
+```
+
+Na VPS, um comando so resolve:
+
+```bash
+./scripts/deploy.sh
+```
+
+Ele puxa, olha o que mudou e escolhe a acao certa: baixa plugins novos se a
+lista mudou, faz rebuild se `Dockerfile`, `entrypoint.sh` ou `docker-compose.yml`
+mudaram, e so reinicia se foi apenas configuracao. No fim, espera o container
+ficar `healthy` e falha em voz alta se nao ficar.
+
+Essa distincao importa mais do que parece: `server.properties` e
+`plugins-config/` chegam ao container por um mount somente-leitura do
+repositorio, entao para eles restart basta. Ja o `entrypoint.sh` vive **dentro**
+da imagem — mexer nele e so reiniciar significa rodar a versao antiga sem
+perceber.
+
+O `.env` e a excecao proposital: ele guarda valores que *devem* variar por
+maquina (`MEMORY=3G` na VPS, `6G` no PC). Esse voce edita direto la.
+
+---
+
 ## Entrar no jogo
 
 Minecraft na versao **26.2** → Multijogador → Adicionar servidor:
@@ -157,13 +187,62 @@ Religar: `docker compose start`
 
 ## Plugins
 
-Jogue os `.jar` em `data/plugins/` e reinicie. Fontes confiaveis:
-[Hangar](https://hangar.papermc.io), [Modrinth](https://modrinth.com/plugins),
-[SpigotMC](https://www.spigotmc.org/resources/).
+Os plugins nao ficam no git (sao .jar), mas a **lista** fica. O
+`scripts/download-plugins.sh` fixa nome, URL e SHA-512 de cada um, entao
+qualquer maquina recebe exatamente os mesmos, com integridade verificada:
 
-Um aviso sobre a 26.2: por ser recem-lancada, plugin que mexe em interno do
-servidor (NMS) pode levar semanas para atualizar. Plugin de API normal funciona
-de cara.
+```bash
+./scripts/download-plugins.sh
+```
+
+As **configuracoes** dos plugins ficam em `plugins-config/` e sao copiadas por
+cima de `data/plugins/` a cada boot, igual ao `server.properties`. Ou seja:
+edite em `plugins-config/`, nunca em `data/plugins/`. O que o plugin cria
+sozinho — contas registradas, caches, banco de dados — e preservado.
+
+Instalados hoje:
+
+| Plugin | Para que |
+|---|---|
+| LoginTo 3.8.1 | login por senha, com autologin para contas originais |
+| SkinsRestorer 15.12.5 | skins em modo offline, e `/skin <nick>` no jogo |
+| LuckPerms 5.5.71 | permissoes e grupos, administrados com `/lp` |
+| TreeTimber 1.8.4 | derruba a arvore inteira ao cortar o tronco |
+
+Para adicionar outro, pegue os dados na API do Modrinth e acrescente uma linha
+em `PLUGINS` no script:
+
+```bash
+curl -s "https://api.modrinth.com/v2/project/<slug>/version?game_versions=%5B%2226.2%22%5D&loaders=%5B%22paper%22%5D"
+```
+
+Um aviso sobre a 26.2: por ser recente, plugin que mexe em interno do servidor
+(NMS) pode levar semanas para atualizar. Confira sempre se ha release para
+`26.2` **e** para o loader `paper` — varios projetos publicam so a build de
+Forge/NeoForge primeiro.
+
+---
+
+## Autenticacao e modo offline
+
+O servidor roda com `online-mode=false`, o que permite entrar sem conta paga da
+Microsoft. Isso tem duas consequencias que os plugins acima resolvem:
+
+**Qualquer um pode dizer que e voce.** Sem verificacao da Mojang, o nick e
+autodeclarado. O LoginTo cobre isso exigindo senha — e, com
+`enable-premium-features: true`, ele ainda faz a verificacao real na Mojang para
+nicks que existem la, deixando esses jogadores entrarem direto. Quem e original
+nao digita senha; quem nao e, digita.
+
+**Quem registra um nick primeiro fica dono dele.** Registre o seu assim que o
+servidor subir, e reserve os dos amigos.
+
+Comandos: `/register <senha> <senha>` no primeiro acesso, `/login <senha>`
+depois. Skin: `/skin <nick>`.
+
+Uma observacao sobre UUIDs: em modo offline eles derivam do nick, nao da Mojang.
+Ao migrar de online para offline, o UUID de cada jogador muda — o op se perde e
+o personagem recomeca. Por isso vale fazer essa troca cedo.
 
 ---
 
@@ -202,7 +281,7 @@ afetado.
 ## O que esta versionado
 
 A receita: `Dockerfile`, `docker-compose.yml`, `entrypoint.sh`,
-`server.properties`, os scripts e este README.
+`server.properties`, `plugins-config/`, os scripts e este README.
 
 Fora do git de proposito: `data/` inteiro (mundo, logs, plugins, dados de
 jogador), os `.jar`, os backups e o `.env`. Mundo e binario que muda por inteiro
