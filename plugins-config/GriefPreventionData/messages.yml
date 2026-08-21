@@ -1,0 +1,538 @@
+# Use a YAML editor like NotepadPlusPlus to edit this file.  
+# After editing, back up your changes before reloading the server in case you made a syntax error.  
+# Use dollar signs ($) for formatting codes, which are documented here: http://minecraft.gamepedia.com/Formatting_codes
+
+Messages:
+  RespectingClaims:
+    Text: 'Voltando a respeitar os terrenos.'
+  IgnoringClaims:
+    Text: 'Ignorando os terrenos a partir de agora.'
+  SuccessfulAbandon:
+    Text: 'Terrenos abandonados. Você agora tem {0} blocos de terreno disponíveis.'
+    Notes: '0: remaining blocks'
+  RestoreNatureActivate:
+    Text: 'Pronto para restaurar a natureza! Clique com o botão direito para restaurar e use /basicclaims para parar.'
+  RestoreNatureAggressiveActivate:
+    Text: 'Modo agressivo ativado. NÃO use isso embaixo de nada que você queira manter! Clique com o botão direito para restaurar agressivamente e use /basicclaims para parar.'
+  FillModeActive:
+    Text: 'Modo preenchimento ativado com raio {0}. Clique com o botão direito numa área para preencher.'
+    Notes: '0: fill radius'
+  TransferClaimPermission:
+    Text: 'Esse comando exige a permissão de terrenos administrativos.'
+  TransferClaimMissing:
+    Text: 'Não há terreno aqui. Fique dentro do terreno administrativo que você quer transferir.'
+  TransferClaimAdminOnly:
+    Text: 'Só terrenos administrativos podem ser transferidos para um jogador.'
+  PlayerNotFound2:
+    Text: 'Nenhum jogador com esse nome entrou recentemente.'
+  TransferTopLevel:
+    Text: 'Só terrenos principais (não subdivisões) podem ser transferidos. Saia da subdivisão e tente de novo.'
+  TransferSuccess:
+    Text: 'Terreno transferido.'
+  TrustListNoClaim:
+    Text: 'Fique dentro do terreno sobre o qual você quer saber.'
+  ClearPermsOwnerOnly:
+    Text: 'Só o dono do terreno pode limpar todas as permissões.'
+  UntrustIndividualAllClaims:
+    Text: 'Acesso de {0} revogado em TODOS os seus terrenos. Para mexer num terreno só, fique dentro dele.'
+    Notes: '0: untrusted player'
+  UntrustEveryoneAllClaims:
+    Text: 'Permissões limpas em TODOS os seus terrenos. Para mexer num terreno só, fique dentro dele.'
+  NoPermissionTrust:
+    Text: 'Você não tem permissão de {0} para gerenciar permissões aqui.'
+    Notes: '0: claim owner''s name'
+  ClearPermissionsOneClaim:
+    Text: 'Permissões limpas neste terreno. Para mexer em TODOS os seus terrenos, fique fora deles.'
+  UntrustIndividualSingleClaim:
+    Text: 'Acesso de {0} revogado neste terreno. Para mexer em TODOS os seus terrenos, fique fora deles.'
+    Notes: '0: untrusted player'
+  OnlySellBlocks:
+    Text: 'Blocos de terreno só podem ser vendidos, não comprados.'
+  BlockPurchaseCost:
+    Text: 'Cada bloco de terreno custa {0}. Seu saldo é {1}.'
+    Notes: '0: cost of one block; 1: player''s account balance'
+  ClaimBlockLimit:
+    Text: 'Você atingiu seu limite de blocos de terreno. Não dá para comprar mais.'
+  InsufficientFunds:
+    Text: 'Você não tem dinheiro suficiente. Precisa de {0}, mas só tem {1}.'
+    Notes: '0: total cost; 1: player''s account balance'
+  MaxBonusReached:
+    Text: 'Não dá para comprar mais {0} blocos de terreno. O servidor tem um limite de {1} blocos de bônus.'
+    Notes: '0: block count; 1: bonus claims limit'
+  PurchaseConfirmation:
+    Text: 'Debitado {0} da sua conta. Você agora tem {1} blocos de terreno disponíveis.'
+    Notes: '0: total cost; 1: remaining blocks'
+  OnlyPurchaseBlocks:
+    Text: 'Blocos de terreno só podem ser comprados, não vendidos.'
+  BlockSaleValue:
+    Text: 'Cada bloco de terreno vale {0}. Você tem {1} disponíveis para venda.'
+    Notes: '0: block value; 1: available blocks'
+  NotEnoughBlocksForSale:
+    Text: 'Você não tem essa quantidade de blocos de terreno disponível para venda.'
+  BlockSaleConfirmation:
+    Text: 'Depositado {0} na sua conta. Você agora tem {1} blocos de terreno disponíveis.'
+    Notes: '0: amount deposited; 1: remaining blocks'
+  AdminClaimsMode:
+    Text: 'Modo de terrenos administrativos ativo. Qualquer terreno criado será gratuito e editável por outros administradores.'
+  BasicClaimsMode:
+    Text: 'De volta ao modo normal de criação de terrenos.'
+  SubdivisionMode:
+    Text: 'Modo subdivisão. Use sua pá para criar subdivisões dentro dos seus terrenos. Use /basicclaims para sair.'
+  SubdivisionVideo2:
+    Text: 'Clique para ajuda sobre subdivisões: {0}'
+    Notes: 0:video URL
+  DeleteClaimMissing:
+    Text: 'Não há terreno aqui.'
+  DeletionSubdivisionWarning:
+    Text: 'Este terreno tem subdivisões. Se você tem certeza de que quer apagá-lo, use /deleteclaim de novo.'
+  DeleteSuccess:
+    Text: 'Terreno apagado.'
+  CantDeleteAdminClaim:
+    Text: 'Você não tem permissão para apagar terrenos administrativos.'
+  DeleteAllSuccess:
+    Text: 'Todos os terrenos de {0} foram apagados.'
+    Notes: '0: owner''s name'
+  NoDeletePermission:
+    Text: 'Você não tem permissão para apagar terrenos.'
+  AllAdminDeleted:
+    Text: 'Todos os terrenos administrativos foram apagados.'
+  AdjustBlocksSuccess:
+    Text: 'Blocos de bônus de {0} ajustados em {1}. Novo total de bônus: {2}.'
+    Notes: '0: player; 1: adjustment; 2: new total'
+  NotTrappedHere:
+    Text: 'Você pode construir aqui. Se vira sozinho.'
+  RescuePending:
+    Text: 'Se você ficar parado por 10 segundos, será teletransportado para fora. Aguarde.'
+  NonSiegeWorld:
+    Text: 'Cerco está desativado aqui.'
+  AlreadySieging:
+    Text: 'Você já está envolvido num cerco.'
+  NotSiegableThere:
+    Text: '{0} não está protegido aí.'
+    Notes: '0: defending player'
+  SiegeTooFarAway:
+    Text: 'Você está longe demais para cercar.'
+  NoSiegeYourself:
+    Text: 'Você não pode cercar a si mesmo, não seja bobo.'
+  NoSiegeDefenseless:
+    Text: 'Esse jogador está indefeso. Vá implicar com outro.'
+  AlreadyUnderSiegePlayer:
+    Text: '{0} já está sob cerco. Entre na festa!'
+    Notes: '0: defending player'
+  AlreadyUnderSiegeArea:
+    Text: 'Essa área já está sob cerco. Entre na festa!'
+  NoSiegeAdminClaim:
+    Text: 'Cerco está desativado nesta área.'
+  SiegeOnCooldown:
+    Text: 'Você ainda está em tempo de espera de cerco contra este defensor ou terreno. Ache outra vítima.'
+  SiegeAlert:
+    Text: 'Você está sob cerco! Se sair do servidor agora, vai morrer. Você precisa derrotar {0}, esperar que ele desista, ou escapar.'
+    Notes: '0: attacker name'
+  SiegeConfirmed:
+    Text: 'O cerco começou! Se sair do servidor agora, vai morrer. Você precisa derrotar {0}, expulsá-lo, ou admitir a derrota e ir embora.'
+    Notes: '0: defender name'
+  AbandonClaimMissing:
+    Text: 'Fique dentro do terreno que você quer apagar, ou considere /abandonallclaims.'
+  NotYourClaim:
+    Text: 'Este terreno não é seu.'
+  DeleteTopLevelClaim:
+    Text: 'Para apagar uma subdivisão, fique dentro dela. Fora isso, use /abandontoplevelclaim para apagar este terreno e todas as subdivisões.'
+  AbandonSuccess:
+    Text: 'Terreno abandonado. Você agora tem {0} blocos de terreno disponíveis.'
+    Notes: '0: remaining claim blocks'
+  ConfirmAbandonAllClaims:
+    Text: 'Tem certeza de que quer abandonar TODOS os seus terrenos? Confirme com /abandonallclaims confirm'
+  CantGrantThatPermission:
+    Text: 'Você não pode conceder uma permissão que você mesmo não tem.'
+  GrantPermissionNoClaim:
+    Text: 'Fique dentro do terreno onde você quer conceder a permissão.'
+  GrantPermissionConfirmation:
+    Text: '{0} agora pode {1} {2}.'
+    Notes: '0: target player; 1: permission description; 2: scope (changed claims)'
+  ManageUniversalPermissionsInstruction:
+    Text: 'Para gerenciar as permissões de TODOS os seus terrenos, fique fora deles.'
+  ManageOneClaimPermissionsInstruction:
+    Text: 'Para gerenciar as permissões de um terreno específico, fique dentro dele.'
+  CollectivePublic:
+    Text: 'o público'
+    Notes: as in 'granted the public permission to...'
+  BuildPermission:
+    Text: 'construir'
+  ContainersPermission:
+    Text: 'acessar baús e animais'
+  AccessPermission:
+    Text: 'usar botões e alavancas'
+  PermissionsPermission:
+    Text: 'gerenciar permissões'
+  LocationCurrentClaim:
+    Text: 'neste terreno'
+  LocationAllClaims:
+    Text: 'em todos os seus terrenos'
+  PvPImmunityStart:
+    Text: 'Você está protegido de ataques de outros jogadores enquanto seu inventário estiver vazio.'
+  SiegeNoDrop:
+    Text: 'Você não pode dar itens enquanto estiver num cerco.'
+  DonateItemsInstruction:
+    Text: 'Para doar o item na sua mão, clique com o botão esquerdo no baú de novo.'
+  ChestFull:
+    Text: 'Este baú está cheio.'
+  DonationSuccess:
+    Text: 'Itens transferidos para o baú!'
+  PlayerTooCloseForFire2:
+    Text: 'Você não pode atear fogo tão perto de outro jogador.'
+  TooDeepToClaim:
+    Text: 'Este baú não pode ser protegido porque está fundo demais. Considere movê-lo.'
+  ChestClaimConfirmation:
+    Text: 'Este baú está protegido.'
+  AutomaticClaimNotification:
+    Text: 'Este baú e os blocos ao redor estão protegidos contra quebra e roubo.'
+  AutomaticClaimOtherClaimTooClose:
+    Text: 'Não deu para criar um terreno para o seu baú: há outro terreno perto demais!'
+  UnprotectedChestWarning:
+    Text: 'Este baú NÃO está protegido. Considere usar uma pá de ouro para expandir um terreno existente ou criar um novo.'
+  ThatPlayerPvPImmune:
+    Text: 'Você não pode ferir jogadores indefesos.'
+  CantFightWhileImmune:
+    Text: 'Você não pode lutar com alguém enquanto está protegido de PvP.'
+  NoDamageClaimedEntity:
+    Text: 'Isso pertence a {0}.'
+    Notes: '0: owner name'
+  ShovelBasicClaimMode:
+    Text: 'Pá de volta ao modo normal de terrenos.'
+  RemainingBlocks:
+    Text: 'Você ainda pode demarcar até {0} blocos.'
+    Notes: '0: remaining blocks'
+  CreativeBasicsVideo2:
+    Text: 'Clique para ajuda sobre terrenos: {0}'
+    Notes: '{0}: video URL'
+  SurvivalBasicsVideo2:
+    Text: 'Clique para ajuda sobre terrenos: {0}'
+    Notes: '{0}: video URL'
+  TrappedChatKeyword:
+    Text: 'preso;travado;trapped;stuck'
+    Notes: When mentioned in chat, players get information about the /trapped command
+      (multiple words can be separated with semi-colons)
+  TrappedInstructions:
+    Text: 'Está preso dentro do terreno de alguém? Tente o comando /trapped.'
+  PvPNoDrop:
+    Text: 'Você não pode largar itens durante combate PvP.'
+  SiegeNoTeleport:
+    Text: 'Você não pode se teletransportar para fora de uma área cercada.'
+  BesiegedNoTeleport:
+    Text: 'Você não pode se teletransportar para dentro de uma área cercada.'
+  SiegeNoContainers:
+    Text: 'Você não pode acessar baús enquanto estiver num cerco.'
+  PvPNoContainers:
+    Text: 'Você não pode acessar baús durante combate PvP.'
+  PvPImmunityEnd:
+    Text: 'Agora você pode lutar com outros jogadores.'
+  NoBedPermission:
+    Text: '{0} não te deu permissão para dormir aqui.'
+    Notes: '0: claim owner'
+  NoWildernessBuckets:
+    Text: 'Você só pode despejar baldes dentro dos seus terrenos ou no subsolo.'
+  NoLavaNearOtherPlayer:
+    Text: 'Você não pode colocar lava tão perto de {0}.'
+    Notes: '0: nearby player'
+  TooFarAway:
+    Text: 'Isso está longe demais.'
+  BlockNotClaimed:
+    Text: 'Ninguém demarcou este bloco.'
+  BlockClaimed:
+    Text: 'Este bloco foi demarcado por {0}.'
+    Notes: '0: claim owner'
+  SiegeNoShovel:
+    Text: 'Você não pode usar a pá enquanto estiver num cerco.'
+  RestoreNaturePlayerInChunk:
+    Text: 'Não deu para restaurar. {0} está nesse chunk.'
+    Notes: '0: nearby player'
+  NoCreateClaimPermission:
+    Text: 'Você não tem permissão para demarcar terreno.'
+  ResizeNeedMoreBlocks:
+    Text: 'Você não tem blocos suficientes para este tamanho. Faltam {0}.'
+    Notes: '0: how many needed'
+  NoCreativeUnClaim:
+    Text: 'Você não pode desfazer a demarcação desta terra. Só dá para aumentar o terreno ou criar outros.'
+  ClaimResizeSuccess:
+    Text: 'Terreno redimensionado. Restam {0} blocos de terreno disponíveis.'
+    Notes: '0: remaining blocks'
+  ResizeFailOverlap:
+    Text: 'Não dá para redimensionar aqui porque ficaria por cima de outro terreno vizinho.'
+  ResizeStart:
+    Text: 'Redimensionando o terreno. Use a pá de novo no novo lugar deste canto.'
+  ResizeFailOverlapSubdivision:
+    Text: 'Você não pode criar uma subdivisão aqui porque ficaria por cima de outra. Use /abandonclaim para apagá-la, ou use a pá num canto para redimensioná-la.'
+  SubdivisionStart:
+    Text: 'Canto da subdivisão marcado! Use a pá no canto oposto desta nova subdivisão.'
+  CreateSubdivisionOverlap:
+    Text: 'A área que você escolheu fica por cima de outra subdivisão.'
+  SubdivisionSuccess:
+    Text: 'Subdivisão criada! Use /trust para compartilhar com os amigos.'
+  CreateClaimFailOverlap:
+    Text: 'Você não pode criar um terreno aqui porque ficaria por cima de outro terreno seu. Use /abandonclaim para apagá-lo, ou use a pá num canto para redimensioná-lo.'
+  CreateClaimFailOverlapOtherPlayer:
+    Text: 'Você não pode criar um terreno aqui porque ficaria por cima do terreno de {0}.'
+    Notes: '0: other claim owner'
+  ClaimsDisabledWorld:
+    Text: 'A demarcação de terrenos está desativada neste mundo.'
+  ClaimStart:
+    Text: 'Canto do terreno marcado! Use a pá no canto oposto para demarcar um retângulo de terra. Para cancelar, guarde a pá.'
+  NewClaimTooNarrow:
+    Text: 'Este terreno seria pequeno demais. Todo terreno precisa ter pelo menos {0} blocos de largura.'
+    Notes: '0: minimum claim width'
+  CreateClaimInsufficientBlocks:
+    Text: 'Você não tem blocos suficientes para demarcar essa área inteira. Faltam {0} blocos.'
+    Notes: '0: additional blocks needed'
+  AbandonClaimAdvertisement:
+    Text: 'Para apagar outro terreno e liberar blocos, use /abandonclaim.'
+  CreateClaimFailOverlapShort:
+    Text: 'A área que você escolheu fica por cima de um terreno existente.'
+  CreateClaimSuccess:
+    Text: 'Terreno criado! Use /trust para compartilhar com os amigos.'
+  SiegeWinDoorsOpen:
+    Text: 'Parabéns! Botões e alavancas estão temporariamente destrancados.'
+  RescueAbortedMoved:
+    Text: 'Você se mexeu! Resgate cancelado.'
+  SiegeDoorsLockedEjection:
+    Text: 'O tempo de saque acabou! Você foi expulso do terreno.'
+  NoModifyDuringSiege:
+    Text: 'Terrenos não podem ser modificados durante um cerco.'
+  OnlyOwnersModifyClaims:
+    Text: 'Só {0} pode modificar este terreno.'
+    Notes: '0: owner name'
+  NoBuildUnderSiege:
+    Text: 'Este terreno está sob cerco de {0}. Ninguém pode construir aqui.'
+    Notes: '0: attacker name'
+  NoBuildPvP:
+    Text: 'Você não pode construir em terrenos durante combate PvP.'
+  NoBuildPermission:
+    Text: 'Você não tem permissão de {0} para construir aqui.'
+    Notes: '0: owner name'
+  NonSiegeMaterial:
+    Text: 'Esse material é duro demais para quebrar.'
+  NoOwnerBuildUnderSiege:
+    Text: 'Você não pode fazer alterações enquanto está sob cerco.'
+  NoAccessPermission:
+    Text: 'Você não tem permissão de {0} para usar isso.'
+    Notes: '0: owner name.  access permission controls buttons, levers, and beds'
+  NoContainersSiege:
+    Text: 'Este terreno está sob cerco de {0}. Ninguém pode acessar baús aqui agora.'
+    Notes: '0: attacker name'
+  NoContainersPermission:
+    Text: 'Você não tem permissão de {0} para usar isso.'
+    Notes: '0: owner''s name.  containers also include crafting blocks'
+  OwnerNameForAdminClaims:
+    Text: 'um administrador'
+    Notes: as in 'You don't have an administrator's permission to build here.'
+  UnknownPlayerName:
+    Text: 'alguém'
+    Notes: 'Name used for unknown players. UUID will be appended if available: "someone
+      (01234567-0123-0123-0123-0123456789ab)"'
+  ClaimTooSmallForEntities:
+    Text: 'Este terreno não é grande o suficiente para isso. Tente aumentá-lo.'
+  TooManyEntitiesInClaim:
+    Text: 'Este terreno já tem entidades demais. Tente aumentá-lo ou remover alguns animais, monstros, quadros ou carrinhos.'
+  YouHaveNoClaims:
+    Text: 'Você não tem nenhum terreno.'
+  ConfirmFluidRemoval:
+    Text: 'Abandonar este terreno vai remover a lava que está dentro dele. Se tem certeza, use /abandonclaim de novo.'
+  AutoBanNotify:
+    Text: '{0}({1}) banido automaticamente. Veja os logs para detalhes.'
+  AdjustGroupBlocksSuccess:
+    Text: 'Blocos de bônus ajustados em {1} para os jogadores com a permissão {0}. Novo total: {2}.'
+    Notes: '0: permission; 1: adjustment amount; 2: new total bonus'
+  InvalidPermissionID:
+    Text: 'Informe um nome de jogador, ou uma permissão entre [colchetes].'
+  HowToClaimRegex:
+    Text: '(^|.*\W)(como|onde)\W.*\W(claim|claimar|demarcar|proteger|protejo|terreno|trancar)(\W.*|$)'
+    Notes: This is a Java Regular Expression.  Look it up before editing!  It's used
+      to tell players about the demo video when they ask how to claim land.
+  NoBuildOutsideClaims:
+    Text: 'Você não pode construir aqui sem antes demarcar um terreno.'
+  PlayerOfflineTime:
+    Text: '  Último login: {0} dias atrás.'
+    Notes: '0: number of full days since last login'
+  BuildingOutsideClaims:
+    Text: 'Outros jogadores também podem construir aqui. Considere demarcar um terreno para proteger o que você fez!'
+  TrappedWontWorkHere:
+    Text: 'Desculpe, não achamos um lugar seguro para te teletransportar. Fale com um administrador.'
+  CommandBannedInPvP:
+    Text: 'Você não pode usar esse comando durante combate PvP.'
+  UnclaimCleanupWarning:
+    Text: 'A terra que você liberou pode ser alterada por outros jogadores ou limpa pelos administradores. Se você construiu algo lá que quer manter, demarque de novo.'
+  BuySellNotConfigured:
+    Text: 'Desculpe, comprar e vender blocos de terreno está desativado.'
+  NoTeleportPvPCombat:
+    Text: 'Você não pode se teletransportar enquanto luta com outro jogador.'
+  NoTNTDamageAboveSeaLevel:
+    Text: 'Aviso: TNT não destrói blocos acima do nível do mar.'
+  NoTNTDamageClaims:
+    Text: 'Aviso: TNT não destrói blocos demarcados.'
+  IgnoreClaimsAdvertisement:
+    Text: 'Para ignorar as proteções, use /ignoreclaims.'
+  NoPermissionForCommand:
+    Text: 'Você não tem permissão para fazer isso.'
+  ClaimsListNoPermission:
+    Text: 'Você não tem permissão para ver informações dos terrenos de outro jogador.'
+  ExplosivesDisabled:
+    Text: 'Este terreno agora está protegido de explosões. Use /claimexplosions de novo para desativar.'
+  ExplosivesEnabled:
+    Text: 'Este terreno agora está vulnerável a explosões. Use /claimexplosions de novo para reativar a proteção.'
+  ClaimExplosivesAdvertisement:
+    Text: 'Para permitir que explosivos destruam blocos neste terreno, use /claimexplosions.'
+  PlayerInPvPSafeZone:
+    Text: 'Esse jogador está numa zona segura de PvP.'
+  NoPistonsOutsideClaims:
+    Text: 'Aviso: pistões não movem blocos para fora dos terrenos.'
+  SoftMuted:
+    Text: '{0} foi silenciado discretamente.'
+    Notes: '0: The changed player''s name.'
+  UnSoftMuted:
+    Text: '{0} não está mais silenciado discretamente.'
+    Notes: '0: The changed player''s name.'
+  DropUnlockAdvertisement:
+    Text: 'Outros jogadores não podem pegar os itens que você largou, a menos que use /unlockdrops antes.'
+  PickupBlockedExplanation:
+    Text: 'Você não pode pegar isso a menos que {0} use /unlockdrops.'
+    Notes: '0: The item stack''s owner.'
+  DropUnlockConfirmation:
+    Text: 'Seus itens largados foram liberados. Outros jogadores já podem pegá-los (até você morrer de novo).'
+  DropUnlockOthersConfirmation:
+    Text: 'Os itens largados de {0} foram liberados.'
+    Notes: '0: The owner of the unlocked drops.'
+  AdvertiseACandACB:
+    Text: 'Você pode usar /acb para dar a si mesmo mais blocos de terreno, ou /adminclaims para criar um terreno administrativo gratuito.'
+  AdvertiseAdminClaims:
+    Text: 'Você poderia criar um terreno administrativo com /adminclaims, que seria compartilhado com os outros administradores.'
+  AdvertiseACB:
+    Text: 'Você pode usar /acb para dar a si mesmo mais blocos de terreno.'
+  NotYourPet:
+    Text: 'Isso pertence a {0} até ser entregue a você com /givepet.'
+    Notes: '0: owner name'
+  PetGiveawayConfirmation:
+    Text: 'Pet transferido.'
+  PetTransferCancellation:
+    Text: 'Doação de pet cancelada.'
+  ReadyToTransferPet:
+    Text: 'Pronto para transferir! Clique com o botão direito no pet que você quer doar, ou cancele com /givepet cancel.'
+  AvoidGriefClaimLand:
+    Text: 'Evite grief! Se você demarcar sua terra, fica protegido.'
+  BecomeMayor:
+    Text: 'Subdivida seu terreno e vire prefeito!'
+  ClaimCreationFailedOverClaimCountLimit:
+    Text: 'Você atingiu seu limite de terrenos. Use /abandonclaim para remover um antes de criar outro.'
+  CreateClaimFailOverlapRegion:
+    Text: 'Você não pode demarcar tudo isso porque não tem permissão para construir aqui.'
+  ResizeFailOverlapRegion:
+    Text: 'Você não tem permissão para construir aí, então não pode demarcar essa área.'
+  ShowNearbyClaims:
+    Text: '{0} terrenos encontrados.'
+    Notes: '0: Number of claims found.'
+  NoChatUntilMove:
+    Text: 'Desculpe, mas você precisa andar um pouco mais antes de poder falar no chat. Recebemos muito bot de spam por aqui. :)'
+  SiegeImmune:
+    Text: 'Esse jogador é imune a /siege.'
+  SetClaimBlocksSuccess:
+    Text: 'Blocos de terreno acumulados atualizados.'
+  IgnoreConfirmation:
+    Text: 'Você agora está ignorando as mensagens desse jogador.'
+  NotIgnoringPlayer:
+    Text: 'Você não está ignorando esse jogador.'
+  UnIgnoreConfirmation:
+    Text: 'Você não está mais ignorando as mensagens desse jogador.'
+  SeparateConfirmation:
+    Text: 'Esses jogadores agora vão se ignorar no chat.'
+  UnSeparateConfirmation:
+    Text: 'Esses jogadores não vão mais se ignorar no chat.'
+  NotIgnoringAnyone:
+    Text: 'Você não está ignorando ninguém.'
+  TrustListHeader:
+    Text: 'Permissões explícitas aqui:'
+    Notes: '0: The claim''s owner'
+  Manage:
+    Text: 'Gerenciar'
+  Build:
+    Text: 'Construir'
+  Containers:
+    Text: 'Baús'
+  Access:
+    Text: 'Acesso'
+  HasSubclaimRestriction:
+    Text: 'Esta subdivisão não herda as permissões do terreno principal'
+  StartBlockMath:
+    Text: '{0} blocos por tempo jogado + {1} de bônus = {2} no total.'
+  ClaimsListHeader:
+    Text: 'Terrenos:'
+  ContinueBlockMath:
+    Text: ' (-{0} blocos)'
+  EndBlockMath:
+    Text: ' = {0} blocos restantes para usar'
+  NoClaimDuringPvP:
+    Text: 'Você não pode demarcar terreno durante combate PvP.'
+  UntrustAllOwnerOnly:
+    Text: 'Só o dono do terreno pode limpar todas as permissões dele.'
+  ManagersDontUntrustManagers:
+    Text: 'Só o dono do terreno pode rebaixar um gerente.'
+  BookAuthor:
+    Text: 'BigScary'
+  BookTitle:
+    Text: 'Como demarcar terreno'
+  BookIntro:
+    Text: 'Demarque terreno para proteger suas coisas! Clique no link acima para aprender sobre terrenos em 3 minutos ou menos. :)'
+  BookDisabledChestClaims:
+    Text: '  Neste servidor, colocar um baú NÃO demarca terreno para você.'
+  BookUsefulCommands:
+    Text: 'Comandos úteis:'
+  BookLink:
+    Text: 'Clique: {0}'
+    Notes: '{0}: video URL'
+  BookTools:
+    Text: 'Nossas ferramentas de terreno são {0} e {1}.'
+    Notes: '0: claim modification tool name; 1:claim information tool name'
+  ResizeClaimTooNarrow:
+    Text: 'Este novo tamanho seria pequeno demais. Terrenos precisam ter pelo menos {0} blocos de largura.'
+    Notes: '0: minimum claim width'
+  ResizeClaimInsufficientArea:
+    Text: 'Este terreno seria pequeno demais. Todo terreno precisa usar pelo menos {0} blocos de terreno no total.'
+    Notes: '0: minimum claim area'
+  NoProfanity:
+    Text: 'Modere seu vocabulário, por favor.'
+  PlayerNotIgnorable:
+    Text: 'Você não pode ignorar esse jogador.'
+  NoEnoughBlocksForChestClaim:
+    Text: 'Como você não tem blocos de terreno disponíveis, nenhum terreno automático foi criado para você. Use /claimslist para acompanhar seu total de blocos disponíveis.'
+  IsIgnoringYou:
+    Text: 'Esse jogador está te ignorando.'
+  MustHoldModificationToolForThat:
+    Text: 'Você precisa estar segurando uma pá de ouro para fazer isso.'
+  StandInClaimToResize:
+    Text: 'Fique dentro do terreno que você quer redimensionar.'
+  ClaimsExtendToSky:
+    Text: 'Terrenos sempre se estendem até a altura máxima de construção.'
+  ClaimsAutoExtendDownward:
+    Text: 'Terrenos se estendem sozinhos para baixo conforme você coloca blocos embaixo deles.'
+  MinimumRadius:
+    Text: 'O raio mínimo é {0}.'
+    Notes: '0: minimum radius'
+  ClaimTooSmallForActiveBlocks:
+    Text: 'Este terreno não é grande o suficiente para blocos ativos (funis, geradores, sinalizadores...). Aumente o terreno primeiro.'
+  TooManyActiveBlocksInClaim:
+    Text: 'Este terreno chegou ao limite de blocos ativos (funis, geradores, sinalizadores...). Aumente o terreno, ou remova outros blocos ativos antes.'
+  ConsoleOnlyCommand:
+    Text: 'Esse comando só pode ser executado no console do servidor.'
+  WorldNotFound:
+    Text: 'Mundo não encontrado.'
+  AdjustBlocksAllSuccess:
+    Text: 'Blocos de bônus de todos os jogadores online ajustados em {0}.'
+    Notes: '0: adjustment amount'
+  TooMuchIpOverlap:
+    Text: 'Desculpe, há jogadores demais conectados com o seu endereço de IP.'
+  StandInSubclaim:
+    Text: 'Você precisa estar dentro de uma subdivisão para restringi-la'
+  SubclaimRestricted:
+    Text: 'As permissões desta subdivisão não vão mais ser herdadas do terreno principal'
+  SubclaimUnrestricted:
+    Text: 'As permissões desta subdivisão agora são herdadas do terreno principal'
+  NetherPortalTrapDetectionMessage:
+    Text: 'Parece que você pode estar preso dentro de um portal do Nether. Se for o caso, vamos te resgatar em alguns segundos!'
+    Notes: Sent to player on join, if they left while inside a nether portal.

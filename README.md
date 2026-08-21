@@ -254,6 +254,12 @@ issue aberta la sobre sulfur cubes nao sendo protegidos. Bau, porta, bloco e mob
 estao cobertos; novidades da versao, talvez nao. Ao bumpar o commit, teste no
 jogo antes de confiar.
 
+As 235 mensagens que o plugin mostra ao jogador estao traduzidas para pt-BR em
+`plugins-config/GriefPreventionData/messages.yml`. Ao bumpar o commit, confira
+se a versao nova acrescentou mensagens: como o arquivo do repositorio sobrescreve
+o de `data/` a cada boot, uma chave nova que so exista no plugin seria apagada
+todo restart e o jogador veria o texto cru no lugar da frase.
+
 [#2628]: https://github.com/GriefPrevention/GriefPrevention/pull/2628
 
 ---
