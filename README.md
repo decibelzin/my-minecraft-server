@@ -209,6 +209,8 @@ Instalados hoje:
 | LuckPerms 5.5.71 | permissoes e grupos, administrados com `/lp` |
 | TreeTimber 1.8.4 | derruba a arvore inteira ao cortar o tronco |
 | GriefPrevention 16.18.7-2 | claim de terreno com pa de ouro; blocos acumulam jogando |
+| EssentialsX 2.22.1-dev | /home, /tpa, /warp, /back, /msg, /kit e mais uma centena |
+| EssentialsX Spawn | /spawn e /setspawn, que nao vem no nucleo |
 
 Para adicionar outro, pegue os dados na API do Modrinth e acrescente uma linha
 em `PLUGINS` no script:
@@ -261,6 +263,45 @@ o de `data/` a cada boot, uma chave nova que so exista no plugin seria apagada
 todo restart e o jogador veria o texto cru no lugar da frase.
 
 [#2628]: https://github.com/GriefPrevention/GriefPrevention/pull/2628
+
+---
+
+## EssentialsX: compilado, e por dois motivos
+
+Como o GriefPrevention, o EssentialsX nao vem do `download-plugins.sh`. Aqui os
+motivos se somam:
+
+**A 26.2 esta mergeada mas nao lancada.** Os PRs #6561 e #6575 entraram no
+branch `2.x` em junho; a ultima release e a 2.22.0, de 31 de maio. Nenhuma
+versao publicada conhece a 26.2.
+
+**Toda build publicada tem a issue [#6608].** Um `IndexOutOfBoundsException` a
+cada entrada de jogador, no evento que envia a lista de comandos ao cliente -
+o que quebra o autocompletar e enche o console. Reproduz na 2.22.0 e na build
+de CI. A correcao esta no PR [#6609], aberto e nao lancado, e o script a aplica
+por cherry-pick sobre o commit fixado.
+
+```bash
+./scripts/build-essentialsx.sh
+```
+
+O script verifica que a correcao entrou no codigo antes de compilar. Se um dia o
+cherry-pick virar no-op, ele falha em vez de gerar silenciosamente um jar com o
+bug de volta.
+
+Sobem so dois modulos: o nucleo e o Spawn. Protect e AntiBuild ficam de fora
+porque duplicam o GriefPrevention; Discord e GeoIP exigem token e licenca; Chat
+mudaria a aparencia do chat sem necessidade.
+
+**Portugues sai de graca.** Diferente do GriefPrevention, o EssentialsX embarca
+48 idiomas no proprio jar, incluindo `pt_BR`. Basta o `locale: pt_BR` no
+`plugins-config/Essentials/config.yml` - nao ha traducao a manter.
+
+Quando sair uma release estavel com a 26.2 e com o #6609, este script pode ser
+apagado e o plugin volta para o `download-plugins.sh`, que e o caminho preferido.
+
+[#6608]: https://github.com/EssentialsX/Essentials/issues/6608
+[#6609]: https://github.com/EssentialsX/Essentials/pull/6609
 
 ---
 
