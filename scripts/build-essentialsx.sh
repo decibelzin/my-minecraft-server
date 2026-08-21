@@ -64,6 +64,14 @@ git -C "$SRC" checkout -q --detach "$COMMIT"
 
 echo "[..] aplicando a correcao ${CORRECAO:0:9} (PR #6609)"
 git -C "$SRC" fetch -q origin "pull/6609/head"
+
+# A data do committer faz parte do hash do commit, e esse hash entra no nome
+# do jar via "git describe". Um cherry-pick comum usa a hora atual, entao
+# cada build produziria um artefato de nome diferente a partir do mesmo
+# codigo - reprodutibilidade so no conteudo, nao no que sai. Fixar as datas
+# junto da identidade do committer torna o SHA deterministico.
+DATA_CORRECAO="2026-08-15T15:30:32+02:00"   # data original do commit no PR
+GIT_AUTHOR_DATE="$DATA_CORRECAO" GIT_COMMITTER_DATE="$DATA_CORRECAO" \
 git -C "$SRC" -c user.email=deploy@local -c user.name=deploy \
   cherry-pick "$CORRECAO" >/dev/null
 
