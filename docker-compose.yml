@@ -21,6 +21,10 @@ services:
 
     volumes:
       - ./data:/data
+      # Repositorio montado somente-leitura. E o que faz "git pull +
+      # restart" bastar: sem ele, o entrypoint leria a config embutida na
+      # imagem e cada ajuste exigiria rebuild.
+      - ./:/opt/repo:ro
 
     # O Paper precisa de tempo para salvar os chunks no SIGTERM.
     # Matar antes disso corrompe o mundo.

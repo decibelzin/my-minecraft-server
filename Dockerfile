@@ -54,6 +54,7 @@ COPY --from=fetch /paper.jar /opt/paper.jar
 # de /data a cada boot. Nao existe eula.txt aqui: ele e escrito a
 # partir da variavel EULA, que e onde voce declara o aceite.
 COPY server.properties /opt/defaults/
+COPY plugins-config /opt/defaults/plugins-config/
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh \

@@ -99,6 +99,19 @@ if (-not (Test-Path $DataDir)) { New-Item -ItemType Directory -Path $DataDir | O
 Copy-Item -Path (Join-Path $Root 'server.properties') `
           -Destination (Join-Path $DataDir 'server.properties') -Force
 
+# Configs de plugin: mesmo modelo do server.properties. Copia por cima
+# apenas os arquivos versionados, preservando o que o plugin gera
+# sozinho - contas registradas, caches, estatisticas.
+$PluginsSrc = Join-Path $Root 'plugins-config'
+if (Test-Path $PluginsSrc) {
+    $PluginsDst = Join-Path $DataDir 'plugins'
+    if (-not (Test-Path $PluginsDst)) {
+        New-Item -ItemType Directory -Path $PluginsDst | Out-Null
+    }
+    Copy-Item -Path (Join-Path $PluginsSrc '*') -Destination $PluginsDst -Recurse -Force
+    Write-Host "[init] configs de plugin sincronizadas do repositorio." -ForegroundColor DarkGray
+}
+
 # --- EULA -------------------------------------------------------------
 # Mesma variavel que o container usa, para nao haver dois mecanismos.
 $eulaAceito = $conf.ContainsKey('EULA') -and $conf['EULA'] -eq 'true'

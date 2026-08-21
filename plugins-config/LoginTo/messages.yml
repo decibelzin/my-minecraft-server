@@ -1,0 +1,228 @@
+MessageVersion: "1.9" # NÃO ALTERE ESTA LINHA
+# -------------------------------------------------------------------------------------------------- #
+#                                                                                                    #
+#                              LoginTo - Mensagens (traduzido pt-BR)                                 #
+#                                                                                                    #
+# -------------------------------------------------------------------------------------------------- #
+
+# Estas mensagens aceitam PlaceholderAPI (se instalado) e o formato MiniMessage
+# (exceto as mensagens de kick).
+#
+# Ao editar, preserve sempre: as tags <red>, <green>, <gold>, <bold> e
+# <dark_aqua>; os placeholders delimitados por sinais de porcentagem; e os
+# nomes dos comandos.
+
+register:
+  # Mensagens do processo de registro
+
+  error:
+
+    # Quando o jogador usa /register mas já tem conta
+    already-registered: "<red>Você já está registrado!"
+
+    # Quando a senha não contém os caracteres exigidos
+    register-character-error: "<red>Sua senha precisa conter estes caracteres: %characters%"
+
+    # Quando o tamanho da senha está fora do permitido
+    password-length: "<red>Sua senha precisa ter entre %min_length% e %max_length% caracteres."
+
+    # Quando a confirmação não bate com a primeira senha
+    password-mismatch: "<red>As senhas não coincidem!"
+
+    # Quando a sintaxe do comando está errada
+    register-usage: "<red>Erro: use /register <senha> <confirmar_senha>"
+
+    password-too-simple: "<red>Essa senha é simples demais, escolha outra."
+
+
+  # Aviso mostrado a quem entra sem ter conta
+  register-prompt: "<dark_aqua>Bem-vindo! Use /register <senha> <confirmar_senha> para se registrar."
+
+  # Aviso quando a senha exige caracteres específicos
+  register-prompt-characters: "<dark_aqua>Bem-vindo! Use /register <senha> <confirmar_senha> para se registrar. Inclua um destes caracteres: %characters%"
+
+  # Quando o registro é concluído
+  register-success: "<green>Registro concluído! Bom jogo."
+
+  # Registro automático de conta original.
+  #
+  # O placeholder %password% existe aqui e foi omitido de propósito. A senha
+  # gerada é aleatória, o jogador nunca digita ela (ele entra pela verificação
+  # na Mojang), e exibi-la só fazia a pessoa achar que precisava guardar algo.
+  # Se alguém um dia ficar sem acesso, um admin resolve com
+  # /delacc <nick> confirm e a pessoa se registra de novo.
+  auto-register-premium: "<green>Sua conta original foi verificada na Mojang. Você entra direto, sem senha — não precisa fazer nada."
+
+  # Mesma lógica da mensagem acima, para contas Bedrock.
+  auto-register-bedrock: "<green>Sua conta Bedrock foi verificada. Você entra direto, sem senha — não precisa fazer nada."
+
+
+login:
+  # Mensagens do processo de login
+
+  error:
+
+    # Quando o jogador tenta logar sem ter conta
+    not-registered: "<red>Você ainda não tem conta registrada!"
+
+    # Quando o jogador já está autenticado
+    already-logged-in: "<red>Você já está autenticado."
+
+    # Quando a sintaxe do comando está errada
+    login-usage: "<red>Erro: use /login <senha>"
+
+    # Quando a senha digitada está errada
+    wrong-password: "<red>Senha incorreta."
+
+
+  # Aviso mostrado a quem já tem conta ao entrar
+  login-prompt: "<dark_aqua>Use /login <senha> para se autenticar."
+
+  # Login concluído
+  login-success: "<green>Login efetuado! Bem-vindo de volta."
+
+  # Login concluído por conta original, sem digitar senha
+  login-premium-success: "<green>Login efetuado com sua conta original! Bem-vindo de volta."
+
+  # Login concluído por conta Bedrock
+  login-bedrock-success: "<green>Login efetuado com sua conta Bedrock! Bem-vindo de volta."
+
+
+unregister:
+  # Mensagens do comando de apagar conta (/delacc)
+
+  error:
+
+    # Quando o jogador informado não existe
+    player-doesnt-exist: "<red>Esse jogador não existe."
+
+    # Quando o administrador esquece de digitar 'confirm' no fim
+    unregister-not-confirmed: "<red>Erro: digite 'confirm' depois do nome do jogador."
+
+    # Quando a sintaxe do comando está errada
+    unregister-usage: "<red>Uso: /delacc <jogador> confirm"
+
+
+  # Enviada ao administrador após apagar uma conta
+  account-unregistered: "<green>Conta removida com sucesso."
+
+  # Enviada ao jogador que teve a conta apagada por um admin
+  admin-unregistered-account: "<red>Sua conta foi apagada por um administrador. Entre novamente para criar outra."
+
+
+# As regras de tamanho e complexidade da senha são as mesmas do registro e
+# estão documentadas lá em cima.
+changepassword:
+  # Mensagens da troca de senha
+
+  error:
+
+    # Quando a sintaxe do comando está errada
+    changepassword-usage: "<red>Uso: /changepassword <novaSenha> <códigoOTP>"
+
+    # Quando o código OTP informado está errado
+    otp-code-wrong: "<red>O código OTP está incorreto."
+
+    # Quando o jogador tenta trocar a senha sem ter OTP configurado
+    no-otp-code: "<red>Você não tem um código OTP configurado. Gere um com /otp"
+
+    # Quando alguém tenta entrar no mundo de QR code de outro jogador
+    qrcode-world-access-denied: "<red>Você não pode acessar o mundo de QR code de outro jogador."
+
+  # Senha trocada com sucesso; obriga a reconectar por segurança
+  password-changed: "<green>Sua senha foi alterada. Entre novamente e faça login."
+
+
+cracked:
+  # Mensagens do comando de status pirata
+
+  error:
+
+    # Quando a conta já está marcada como pirata
+    already-cracked: "<red>Sua conta já está marcada como pirata."
+
+  # Aviso exibido ao usar /cracked
+  cracked-warn: "<bold><gold>ATENÇÃO:</gold></bold><red> Você está prestes a marcar sua conta como pirata. Isso protege seu nick de quem tem conta original e tente tomá-lo.
+Digite <green>/cracked</green> de novo para confirmar."
+
+  # Status aplicado com sucesso
+  cracked-done: "<green>Sua conta foi marcada como pirata."
+
+
+premium:
+  # Mensagens do comando de status original
+
+  error:
+
+    # Quando a conta já está marcada como original
+    already-premium: "<red>Sua conta já está marcada como original."
+
+  # Aviso exibido ao usar /premium
+  premium-warn: "<bold><gold>ATENÇÃO:</gold></bold><red> Ao mudar para conta original, você pode perder acesso ao seu progresso se os nomes das contas não baterem exatamente.
+Digite <green>/premium</green> de novo para confirmar."
+
+  # Status aplicado com sucesso
+  premium-done: "<green>Sua conta foi marcada como original."
+
+
+otp:
+  # Mensagens da configuração do OTP, usado para recuperar a senha
+
+  error:
+
+    # Quando o jogador tenta gerar um OTP tendo um já configurado
+    otp-already-created: "<red>Você não pode gerar outro código OTP. Fale com um administrador para apagar sua conta, se precisar."
+
+    # Quando um jogador sem conta tenta usar o comando
+    otp-request-without-account: "<red>Você precisa registrar uma conta antes de configurar o OTP."
+
+  # Aviso de segurança antes de exibir o QR code
+  otp-allert: "<bold><gold>ATENÇÃO:</gold></bold><red> Este recurso permite trocar sua senha sem fazer login. Garanta que você não está compartilhando a tela com ninguém. Você receberá um QR code para escanear com um app autenticador, como o Google Authenticator.
+Se for seguro continuar, digite <green>/otp</green> de novo para gerar seu código."
+
+  otp-world:
+    # Mensagem exibida junto ao QR code montado no jogo
+    otp-periodic-message: "<bold><gold>ATENÇÃO:</gold></bold><red> Escaneie este QR code com seu app autenticador. Feito isso, você pode sair e entrar novamente no servidor."
+
+
+errors:
+  # Erros gerais e restrições
+
+  # Erros sem relação com eventos de autenticação
+  general:
+
+    # Quando falta permissão para o comando
+    no-permission: "<red>Você não tem permissão para usar este comando."
+
+    # Quando o recurso está desativado na configuração
+    feature-not-enabled: "<red>Este recurso está desativado no momento."
+
+  # Restrições aplicadas antes da autenticação
+  activity-before-login:
+
+    # Quando um jogador não autenticado tenta usar comandos
+    oncommand-when-not-authenticated: "<red>Autentique-se antes de usar comandos."
+
+    # Quando um jogador não autenticado tenta falar no chat
+    chatting-before-login: "<red>Você precisa fazer login para usar o chat."
+
+  # Mensagens de kick por falha de autenticação
+  login-fail:
+
+    # Kick por exceder o número máximo de tentativas
+    onkick-for-failed-login: "<red>Tentativas de login demais. Entre novamente e tente outra vez."
+
+    # Kick por estourar o tempo de autenticação
+    onkick-for-long-waiting: "<red>Tempo de autenticação esgotado. Entre novamente e tente outra vez."
+
+    # Kick quando já há alguém online com o mesmo nick
+    onkick-for-joining-with-same-name: "<red>Já existe outro jogador com o seu nick online neste servidor."
+
+    # Quando o nick é de conta original mas a autenticação premium foi pulada
+    on-authentication-skip: "<red>Você não tem um perfil autenticado agora. Fale com a equipe ou tente reiniciar seu launcher."
+
+    # Quando o plugin considera o jogador Bedrock mas o floodgate não o encontra
+    java-player-marked-as-bedrock: "<red>Você foi identificado como jogador Bedrock, mas parece ser Java. Tente entrar novamente."
+
+    # Quando o UUID enviado difere do que o Bukkit tem para o jogador
+    on-login-with-different-uuid: "<red>O sistema de autenticação e o servidor têm dois UUIDs diferentes para sua conta. Tente entrar novamente."

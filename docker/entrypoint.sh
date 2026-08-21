@@ -4,12 +4,31 @@ set -euo pipefail
 DATA_DIR=/data
 JAR=/opt/paper.jar
 
-# --- server.properties -----------------------------------------------
-# O arquivo versionado no repositorio e a fonte de verdade e sobrescreve
-# o de /data a cada boot. Isso torna impossivel a config do servidor
-# divergir em silencio daquilo que esta no git.
-cp /opt/defaults/server.properties "$DATA_DIR/server.properties"
+# --- de onde vem a configuracao -------------------------------------
+# Se o repositorio estiver montado (o compose monta em /opt/repo), ele
+# manda. Sem o mount, usa o que foi embutido na imagem no build.
+# O mount e o que faz "git pull + restart" bastar: sem ele seria
+# preciso rebuildar a imagem a cada mudanca de config.
+if [ -d /opt/repo ]; then
+  ORIGEM=/opt/repo
+else
+  ORIGEM=/opt/defaults
+fi
+echo "[init] configuracao vinda de $ORIGEM"
 
+# --- server.properties -----------------------------------------------
+# O arquivo versionado e a fonte de verdade e sobrescreve o de /data a
+# cada boot, tornando impossivel a config divergir em silencio do git.
+cp "$ORIGEM/server.properties" "$DATA_DIR/server.properties"
+
+# --- configs de plugin -----------------------------------------------
+# Copia por cima somente os arquivos versionados, preservando o que o
+# plugin cria sozinho: contas registradas, caches, estatisticas.
+if [ -d "$ORIGEM/plugins-config" ]; then
+  mkdir -p "$DATA_DIR/plugins"
+  cp -r "$ORIGEM/plugins-config/." "$DATA_DIR/plugins/"
+  echo "[init] configs de plugin sincronizadas"
+fi
 # --- EULA -------------------------------------------------------------
 # Escrito exclusivamente a partir da variavel de ambiente: e o unico
 # ponto onde voce declara que leu e aceitou os termos da Mojang.
