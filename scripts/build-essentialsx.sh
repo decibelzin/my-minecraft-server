@@ -84,6 +84,14 @@ if ! grep -q "firstAlias" "$SRC/Essentials/src/main/java/com/earth2me/essentials
 fi
 
 VERSAO="$(git -C "$SRC" describe --tags --always)"
+
+# Jars de builds anteriores sobrevivem em build/libs, e o Gradle so
+# regrava os que mudaram. Sem limpar, a selecao la embaixo pode pegar um
+# jar antigo, de outro commit, e instala-lo como se fosse o recem-compilado
+# - foi o que aconteceu: o servidor rodou o build anterior por um deploy
+# inteiro sem nada no log indicando isso.
+find "$SRC" -type d -path "*/build/libs" -exec rm -rf {} + 2>/dev/null || true
+
 echo "[..] compilando (o primeiro build baixa o Gradle inteiro, demora)"
 
 docker run --rm \
@@ -94,12 +102,20 @@ docker run --rm \
 
 instalados=0
 for m in $MODULOS; do
-  jar="$(find "$SRC" -path "*/build/libs/$m-*.jar" \
-         -not -name "*unshaded*" -not -name "*sources*" 2>/dev/null | head -1)"
-  if [ -z "$jar" ]; then
-    echo "[ERRO] o build nao produziu o modulo $m." >&2
+  # Cada modulo gera varios jars: o do plugin, e os de classificador
+  # (unshaded, sources, javadoc). Instalar o errado nao da erro visivel no
+  # build - o javadoc ja foi parar em data/plugins uma vez, e so o Paper
+  # reclamou, na hora de subir. Por isso exigimos exatamente um resultado:
+  # se um classificador novo aparecer, o script para em vez de chutar.
+  mapfile -t achados < <(find "$SRC" -path "*/build/libs/$m-*.jar" \
+      -not -name "*unshaded*" -not -name "*sources*" -not -name "*javadoc*" \
+      2>/dev/null | sort)
+  if [ "${#achados[@]}" -ne 1 ]; then
+    echo "[ERRO] esperava exatamente 1 jar de $m, encontrei ${#achados[@]}:" >&2
+    printf '          %s\n' "${achados[@]:-(nenhum)}" >&2
     exit 1
   fi
+  jar="${achados[0]}"
   # Remove versoes anteriores: dois jars do mesmo plugin na pasta fazem o
   # Paper carregar os dois e brigar entre si.
   rm -f "$DEST/$m-"*.jar
