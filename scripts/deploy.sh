@@ -5,13 +5,20 @@
 #
 # Decide sozinho entre restart e rebuild, porque a escolha errada faz a
 # mudanca simplesmente nao aparecer - e isso e dificil de perceber.
+#
+# O argumento opcional e interno: e o commit de antes do pull, usado quando o
+# script se reexecuta. Nao passe na mao.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-ANTES="$(git rev-parse HEAD)"
-echo "[deploy] buscando atualizacoes..."
-git pull --ff-only -q
+if [ -n "${1:-}" ]; then
+  ANTES="$1"                      # ja viemos de um pull; nao puxar de novo
+else
+  ANTES="$(git rev-parse HEAD)"
+  echo "[deploy] buscando atualizacoes..."
+  git pull --ff-only -q
+fi
 DEPOIS="$(git rev-parse HEAD)"
 
 if [ "$ANTES" = "$DEPOIS" ]; then
@@ -25,6 +32,16 @@ MUDOU="$(git diff --name-only "$ANTES" "$DEPOIS")"
 echo "[deploy] arquivos alterados:"
 echo "$MUDOU" | sed 's/^/           /'
 echo
+
+# O git pull pode ter reescrito este proprio arquivo enquanto ele roda. O bash
+# le o script conforme executa, entao continuar daqui usaria a logica antiga -
+# foi assim que a etapa do GriefPrevention nao rodou no deploy que a
+# introduziu. Reexecutar e a unica forma de rodar o que acabou de chegar.
+if [ -z "${1:-}" ] && echo "$MUDOU" | grep -q '^scripts/deploy.sh$'; then
+  echo "[deploy] o proprio deploy.sh mudou; reiniciando com a versao nova"
+  echo
+  exec "$0" "$ANTES"
+fi
 
 # Lista de plugins mudou: baixa antes de subir, senao o servidor sobe sem eles
 if echo "$MUDOU" | grep -q '^scripts/download-plugins.sh$'; then
