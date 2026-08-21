@@ -33,6 +33,14 @@ if echo "$MUDOU" | grep -q '^scripts/download-plugins.sh$'; then
   echo
 fi
 
+# O GriefPrevention e compilado do fonte, entao mudar o commit fixado na
+# receita significa reconstruir o jar antes de subir.
+if echo "$MUDOU" | grep -q '^scripts/build-griefprevention.sh$'; then
+  echo "[deploy] receita do GriefPrevention mudou, recompilando..."
+  ./scripts/build-griefprevention.sh
+  echo
+fi
+
 # Dockerfile e entrypoint vivem dentro da imagem: exigem rebuild.
 # server.properties e plugins-config vem do mount somente-leitura,
 # entao para eles um restart basta.

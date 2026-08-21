@@ -8,5 +8,8 @@ data/
 # Backups compactados
 backups/
 
+# Fonte clonado e cache do maven do build-griefprevention.sh
+.build/
+
 # Segredos e ajustes locais da maquina
 .env
