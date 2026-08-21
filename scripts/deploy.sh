@@ -50,13 +50,14 @@ if echo "$MUDOU" | grep -q '^scripts/download-plugins.sh$'; then
   echo
 fi
 
-# O GriefPrevention e compilado do fonte, entao mudar o commit fixado na
-# receita significa reconstruir o jar antes de subir.
-if echo "$MUDOU" | grep -q '^scripts/build-griefprevention.sh$'; then
-  echo "[deploy] receita do GriefPrevention mudou, recompilando..."
-  ./scripts/build-griefprevention.sh
+# Plugins compilados do fonte tem uma receita em scripts/build-*.sh. Mudar
+# o commit fixado numa delas significa reconstruir o jar antes de subir,
+# senao o servidor sobe com o binario antigo e a mudanca nao aparece.
+for receita in $(echo "$MUDOU" | grep -E '^scripts/build-.+\.sh$' || true); do
+  echo "[deploy] $receita mudou, recompilando..."
+  "./$receita"
   echo
-fi
+done
 
 # Dockerfile e entrypoint vivem dentro da imagem: exigem rebuild.
 # server.properties e plugins-config vem do mount somente-leitura,
