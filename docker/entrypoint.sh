@@ -29,6 +29,22 @@ if [ -d "$ORIGEM/plugins-config" ]; then
   cp -r "$ORIGEM/plugins-config/." "$DATA_DIR/plugins/"
   echo "[init] configs de plugin sincronizadas"
 fi
+
+# --- config do Paper ---------------------------------------------------
+# Mesma logica das configs de plugin, para paper-global.yml e
+# paper-world-defaults.yml. Sem isto, ajuste como o anti-xray vive apenas
+# no volume da VPS: sumiria numa recriacao do volume, em silencio.
+#
+# O Paper reescreve estes arquivos no boot para acrescentar chaves que
+# versoes novas trouxeram. Como o repositorio manda, uma chave nova volta
+# ao padrao a cada restart enquanto nao for trazida para ca - o mesmo custo
+# ja aceito no messages.yml do GriefPrevention.
+if [ -d "$ORIGEM/paper-config" ]; then
+  mkdir -p "$DATA_DIR/config"
+  cp -r "$ORIGEM/paper-config/." "$DATA_DIR/config/"
+  echo "[init] config do Paper sincronizada"
+fi
+
 # --- EULA -------------------------------------------------------------
 # Escrito exclusivamente a partir da variavel de ambiente: e o unico
 # ponto onde voce declara que leu e aceitou os termos da Mojang.

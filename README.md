@@ -144,9 +144,9 @@ lista mudou, faz rebuild se `Dockerfile`, `entrypoint.sh` ou `docker-compose.yml
 mudaram, e so reinicia se foi apenas configuracao. No fim, espera o container
 ficar `healthy` e falha em voz alta se nao ficar.
 
-Essa distincao importa mais do que parece: `server.properties` e
-`plugins-config/` chegam ao container por um mount somente-leitura do
-repositorio, entao para eles restart basta. Ja o `entrypoint.sh` vive **dentro**
+Essa distincao importa mais do que parece: `server.properties`,
+`plugins-config/` e `paper-config/` chegam ao container por um mount
+somente-leitura do repositorio, entao para eles restart basta. Ja o `entrypoint.sh` vive **dentro**
 da imagem — mexer nele e so reiniciar significa rodar a versao antiga sem
 perceber.
 
@@ -199,6 +199,16 @@ As **configuracoes** dos plugins ficam em `plugins-config/` e sao copiadas por
 cima de `data/plugins/` a cada boot, igual ao `server.properties`. Ou seja:
 edite em `plugins-config/`, nunca em `data/plugins/`. O que o plugin cria
 sozinho — contas registradas, caches, banco de dados — e preservado.
+
+O mesmo vale para o **Paper**: `paper-config/` guarda o `paper-global.yml` e o
+`paper-world-defaults.yml`, copiados para `data/config/` a cada boot. E ali que
+vive o anti-xray, por exemplo. Sem versionar, um ajuste desses existiria so no
+volume da VPS e sumiria numa recriacao dele, sem nada no log avisando.
+
+Um custo a conhecer: o Paper reescreve esses arquivos no boot para acrescentar
+chaves que versoes novas trouxeram. Como o repositorio manda, uma chave nova
+volta ao padrao a cada restart enquanto nao for trazida para o `paper-config/`.
+Ao subir a versao do Paper, vale comparar os dois.
 
 Instalados hoje:
 
@@ -363,7 +373,8 @@ afetado.
 ## O que esta versionado
 
 A receita: `Dockerfile`, `docker-compose.yml`, `entrypoint.sh`,
-`server.properties`, `plugins-config/`, os scripts e este README.
+`server.properties`, `plugins-config/`, `paper-config/`, os scripts e este
+README.
 
 Fora do git de proposito: `data/` inteiro (mundo, logs, plugins, dados de
 jogador), os `.jar`, os backups e o `.env`. Mundo e binario que muda por inteiro
