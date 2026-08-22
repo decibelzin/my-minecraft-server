@@ -221,6 +221,8 @@ Instalados hoje:
 | GriefPrevention 16.18.7-2 | claim de terreno com pa de ouro; blocos acumulam jogando |
 | EssentialsX 2.22.1-dev | /home, /tpa, /warp, /back, /msg, /kit e mais uma centena |
 | EssentialsX Spawn | /spawn e /setspawn, que nao vem no nucleo |
+| Geyser 2.11.2 | deixa quem joga Bedrock (celular, console) entrar |
+| Floodgate 2.2.5 | dispensa conta Java para esses jogadores |
 
 Para adicionar outro, pegue os dados na API do Modrinth e acrescente uma linha
 em `PLUGINS` no script:
@@ -312,6 +314,31 @@ apagado e o plugin volta para o `download-plugins.sh`, que e o caminho preferido
 
 [#6608]: https://github.com/EssentialsX/Essentials/issues/6608
 [#6609]: https://github.com/EssentialsX/Essentials/pull/6609
+
+---
+
+## Bedrock: celular e console
+
+O **Geyser** traduz o protocolo do Bedrock para o do Java, e o **Floodgate**
+deixa esse pessoal entrar sem conta Java. Os dois sao binarios prontos, entao
+vivem no `download-plugins.sh`, com URL e SHA-512 fixados como os demais - nao
+precisam ser compilados.
+
+Uma pegadinha: o Modrinth so publica `fabric` e `neoforge` do Floodgate. A build
+de Paper vem do servidor do proprio projeto, e o SHA-512 no script foi calculado
+do arquivo baixado, depois de conferir que o SHA-256 batia com o anunciado pela
+API deles.
+
+**A porta e outra.** O Java entra pela 25565 em TCP; o Bedrock fala **UDP na
+19132**, mapeada no `docker-compose.yml`. Sem esse mapeamento o servidor
+simplesmente nao aparece na lista de quem joga no celular - e nada no log diz
+por que.
+
+Para conectar no celular: adicionar servidor com o IP da VPS e a porta `19132`.
+
+O Floodgate tambem melhora a vida de quem entra por ali no nosso caso especifico:
+como ele verifica o jogador por conta propria, o LoginTo o deixa passar sem pedir
+`/login` - digitar senha em teclado de celular a cada entrada seria bem chato.
 
 ---
 
