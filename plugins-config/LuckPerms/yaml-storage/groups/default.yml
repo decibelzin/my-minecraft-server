@@ -1,0 +1,51 @@
+# Grupo de todo mundo que entra. O LuckPerms poe cada jogador novo aqui
+# automaticamente, entao esta lista e a resposta para "o que um amigo pode
+# fazer no servidor".
+#
+# Ela precisa existir porque 424 das 452 permissoes do EssentialsX nao
+# declaram default no plugin.yml, e no Bukkit isso significa apenas operador.
+# Sem esta lista, quem entrasse nao conseguiria usar /home nem /tpa.
+#
+# Para dar ou tirar algo, edite aqui e rode ./scripts/deploy.sh. Mudanca feita
+# em jogo com /lp e desfeita no proximo restart.
+name: default
+permissions:
+# --- casa ---
+- essentials.home
+- essentials.sethome
+- essentials.delhome
+# As duas juntas dao 3 casas: o numero vem de sethome-multiple no config.yml
+# do Essentials, onde "default" vale 3. Sao necessarias as duas permissoes.
+- essentials.sethome.multiple
+- essentials.sethome.multiple.default
+
+# --- teleporte entre jogadores ---
+- essentials.tpa
+- essentials.tpahere
+- essentials.tpaccept
+- essentials.tpdeny
+- essentials.tpacancel
+
+# --- deslocamento ---
+- essentials.spawn
+- essentials.back
+- essentials.warp
+- essentials.warp.list
+
+# --- social ---
+- essentials.msg
+- essentials.afk
+- essentials.list
+- essentials.me
+- essentials.ignore
+- essentials.mail
+- essentials.mail.send
+- essentials.motd
+- essentials.seen
+
+# --- terreno ---
+# O GriefPrevention registra as permissoes dele em codigo e ja libera a
+# demarcacao para todos por padrao. Esta linha e explicita de proposito: sem
+# ela, a permissao mais importante do servidor ficaria dependendo de um
+# padrao interno do plugin, invisivel aqui.
+- griefprevention.claims

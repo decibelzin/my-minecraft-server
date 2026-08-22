@@ -1,0 +1,16 @@
+# Grupo para quem administra sem ser operador. Ninguem esta nele por padrao;
+# ele existe para o dia em que voce quiser dar poderes a um amigo sem entregar
+# o op inteiro, que no Minecraft vem com tudo, inclusive parar o servidor.
+#
+# Para colocar alguem:  /lp user <nick> parent add admin
+# Para tornar permanente, o arquivo do usuario tambem precisa vir para
+# plugins-config/LuckPerms/yaml-storage/users/.
+name: admin
+permissions:
+# Herda tudo do grupo default, para nao repetir a lista de cima.
+- group.default
+# Coringas por plugin em vez de "*": o coringa geral daria tambem permissoes
+# de qualquer plugin instalado no futuro, sem ninguem decidir.
+- essentials.*
+- griefprevention.*
+- luckperms.*
