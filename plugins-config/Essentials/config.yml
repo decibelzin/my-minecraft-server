@@ -1274,7 +1274,11 @@ newbies:
 # Set this to 'high' if you want Essentials Spawn to handle the respawning.
 # Set this to 'highest' if you want to force Essentials Spawn to handle the respawning.
 # Note: Changes will not apply until after the server is restarted.
-respawn-listener-priority: high
+# Forcado para 'none' (o padrao do plugin e 'high'): com 'high' o
+# EssentialsSpawn assume o respawn e, como 'respawn-at-home' abaixo e false,
+# manda todo mundo para o spawnpoint do mundo - a cama passa a ser ignorada.
+# Com 'none' quem decide e o Minecraft: cama se houver, spawn se nao houver.
+respawn-listener-priority: none
 
 # What priority should Essentials use for handling spawning on joining the server?
 # See 'respawn-listener-priority' above for possible values.
