@@ -1,0 +1,18 @@
+[Unit]
+Description=Backup diario do mundo do Minecraft
+
+[Timer]
+# 5h da manha no horario de Brasilia. O host roda em UTC, entao declarar o
+# fuso aqui evita fazer a conta na mao e erra-la quando o horario mudar.
+OnCalendar=*-*-* 05:00:00 America/Sao_Paulo
+
+# Se a VPS estiver desligada na hora marcada, roda assim que voltar. Sem
+# isto, uma noite fora significaria um dia sem backup, em silencio.
+Persistent=true
+
+# O backup derruba o servidor por alguns minutos. O atraso aleatorio evita
+# que isso caia sempre no mesmo minuto exato.
+RandomizedDelaySec=10min
+
+[Install]
+WantedBy=timers.target

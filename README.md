@@ -377,6 +377,34 @@ servidor esta rodando: se for container, para e religa sozinho; se for nativo,
 console primeiro. Use `--hot` para copiar mesmo assim, sabendo que pode pegar um
 chunk no meio da gravacao.
 
+### Automatico, todo dia
+
+Rodar o backup na mao funciona ate a noite em que voce esquecer. Na VPS, um
+timer do systemd chama o script sozinho:
+
+```bash
+sudo ./scripts/install-systemd-units.sh
+```
+
+As unidades vivem versionadas em `systemd/` e o script as instala no host,
+substituindo `@RAIZ@` pelo caminho real do clone - elas nao chumbam
+`/opt/my-minecraft-server`, entao funcionam de onde quer que o repositorio
+esteja. Isso fica fora do `entrypoint.sh` de proposito: o container nao pode
+nem deve mexer no systemd da maquina.
+
+O horario e **05:00 de Brasilia**, declarado com fuso no `OnCalendar` para nao
+depender de o host estar em UTC. Com `Persistent=true`, uma noite com a VPS
+desligada nao vira um dia sem backup: ele roda assim que a maquina voltar.
+
+Vale saber que **o servidor cai por alguns minutos** durante a copia - e o
+preco de um backup consistente, e o motivo do horario escolhido.
+
+Para conferir quando roda ou disparar na hora:
+
+```bash
+systemctl list-timers minecraft-backup.timer
+```
+
 ---
 
 ## Atualizar o Paper

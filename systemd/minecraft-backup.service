@@ -1,0 +1,22 @@
+[Unit]
+# O caminho do repositorio e injetado pelo install-systemd-units.sh: chumbar
+# /opt/my-minecraft-server aqui faria a unidade versionada so funcionar nesta
+# VPS, e o resto do repositorio nao assume onde ele foi clonado.
+Description=Backup do mundo do Minecraft
+Documentation=https://github.com/decibelzin/my-minecraft-server
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=@RAIZ@
+ExecStart=@RAIZ@/scripts/backup-world.sh
+
+# O script para o container para copiar consistente e religa depois. O
+# stop_grace_period do compose e 2 minutos, entao um mundo grande pode levar
+# alguns minutos no total; o padrao de 90s do systemd mataria no meio.
+TimeoutStartSec=20min
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=minecraft-backup
