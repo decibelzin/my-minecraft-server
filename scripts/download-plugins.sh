@@ -27,6 +27,7 @@ LuckPerms-Bukkit-5.5.71.jar|https://cdn.modrinth.com/data/Vebnzrzj/versions/b0mk
 timber-1.8.4.jar|https://cdn.modrinth.com/data/52W2RPUh/versions/Bc7hzkik/timber-1.8.4.jar|4daf352f3687de25afe4fd77b7d779ece2e2f610c734df17f612872a580f36936d9831e35b568d15b646c85722c5abae6e20d2ecb11b2f4d18b77bb74d729ca4
 Geyser-Spigot.jar|https://cdn.modrinth.com/data/wKkoqHrH/versions/cEESv2Kx/Geyser-Spigot.jar|2a6c2940e05e5441db4595b2d72a503f933f5be486eb4780739e2ab67c32330c8eda2ec79d1fb6b077dbbeca0b3e83614ef67b963e15f92c056e3da1d307fc28
 floodgate-spigot.jar|https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/140/downloads/spigot|59598fc9ba1a5b233455273d63f62753078cb0e551f9fc93732a02571f28daf991e4b9161e73370aee72b89d51cf7d40a475628c1e2a8c09966776212ea87160
+VaultUnlocked-2.20.2.jar|https://cdn.modrinth.com/data/ayRaM8J7/versions/cLNipSgw/VaultUnlocked-2.20.2.jar|9c5baefbe23ede10d00af580fc9d5d6da9a9baac40feef078bb951448b89df039131299bd5d3fe8ccd947367de8fe24b543dc9cce83fbf1687a3221baca8da8e
 "
 
 mkdir -p "$DEST"
