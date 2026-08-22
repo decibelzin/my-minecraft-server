@@ -371,7 +371,15 @@ o personagem recomeca. Por isso vale fazer essa troca cedo.
 ./scripts/backup-world.sh
 ```
 
-Compacta o mundo em `backups/` e mantem os 7 mais recentes. Ele detecta como o
+Compacta em `backups/` o mundo **e os dados dos plugins**, mantendo os 7 mais
+recentes. Os plugins entram porque guardam o que nao se recompra: terrenos do
+GriefPrevention, contas do LoginTo, homes e warps do Essentials, grupos do
+LuckPerms, chave do Floodgate. Restaurar so o mundo devolveria o terreno e
+perderia tudo isso.
+
+Os jars, as bibliotecas que cada plugin baixa sozinho e a wordlist de 134 MB do
+LoginTo ficam de fora - sao regeneraveis, e sem essas exclusoes o arquivo
+passaria de ~35 MB para mais de 250. Ele detecta como o
 servidor esta rodando: se for container, para e religa sozinho; se for nativo,
 **se recusa a rodar** com o servidor no ar e pede que voce digite `stop` no
 console primeiro. Use `--hot` para copiar mesmo assim, sabendo que pode pegar um

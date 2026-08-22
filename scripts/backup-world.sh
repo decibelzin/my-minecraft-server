@@ -84,9 +84,31 @@ fi
 # world_nether/world_the_end sao do layout antigo do Bukkit e ficam na
 # lista so para quem restaurar um mundo velho; hoje sao ignorados.
 ALVOS=()
-for item in world world_nether world_the_end server.properties; do
+for item in world world_nether world_the_end server.properties plugins; do
   [ -e "data/$item" ] && ALVOS+=("$item")
 done
+
+# plugins/ entra porque guarda o que nao se recompra: os terrenos do
+# GriefPrevention, as contas do LoginTo, as homes e warps do Essentials, os
+# grupos do LuckPerms e a chave do Floodgate. Restaurar so o mundo devolveria
+# o terreno e perderia tudo isso.
+#
+# Mas quase todo o peso da pasta e coisa que o proprio plugin rebaixa ou
+# regenera no primeiro boot. Sem estas exclusoes o backup passaria de ~7 MB
+# para mais de 250 MB, sendo 134 deles uma wordlist de senhas.
+EXCLUIR=(
+  --exclude='*.jar'                         # reinstalados pelos scripts do repo
+  --exclude='plugins/*/lib'                 # dependencias baixadas no 1o boot
+  --exclude='plugins/*/libs'
+  --exclude='plugins/*/libraries'
+  --exclude='plugins/*/cache'
+  --exclude='plugins/*/locales'             # traducoes que ja vem no jar
+  --exclude='plugins/*/translations'
+  --exclude='plugins/LoginTo/rockyou.txt'   # wordlist de 134 MB, rebaixavel
+  --exclude='plugins/Essentials/items.json' # gerado a partir do proprio servidor
+  --exclude='plugins/spark'                 # dumps do profiler
+  --exclude='plugins/bStats'                # metricas
+)
 
 if [ ${#ALVOS[@]} -eq 0 ]; then
   echo "erro: nada para copiar dentro de data/" >&2
@@ -94,7 +116,7 @@ if [ ${#ALVOS[@]} -eq 0 ]; then
 fi
 
 echo "[backup] compactando ${#ALVOS[@]} itens em ${DEST}"
-tar -czf "$DEST" -C data "${ALVOS[@]}"
+tar -czf "$DEST" "${EXCLUIR[@]}" -C data "${ALVOS[@]}"
 
 if [ "$RELIGAR" = true ]; then
   echo "[backup] religando o container..."
