@@ -365,6 +365,25 @@ o personagem recomeca. Por isso vale fazer essa troca cedo.
 
 ---
 
+## Atalhos do Windows
+
+Dois `.bat` na raiz, para nao precisar decorar comando:
+
+| Arquivo | O que abre |
+|---|---|
+| `conectar-vps.bat` | um shell na VPS, ja dentro de `/opt/my-minecraft-server` |
+| `console-servidor.bat` | o console do servidor de Minecraft, onde da para digitar `list`, `lp`, `worldborder get` |
+
+O console usa `--detach-keys=ctrl-x`, entao **Ctrl+X sai sem derrubar o
+servidor**, no lugar da sequencia padrao Ctrl+P Ctrl+Q. E usa
+`--sig-proxy=false` para que um Ctrl+C distraido nao seja repassado ao
+processo do Minecraft - sem isso, essa tecla derruba o servidor.
+
+Digitar `stop` ali dentro desliga o servidor de verdade: e o console real, nao
+uma copia.
+
+---
+
 ## Backup
 
 ```bash

@@ -6,6 +6,10 @@
 *.yml  text eol=lf
 Dockerfile   text eol=lf
 
+# O .bat e a excecao a regra acima: ele roda no cmd.exe, nao no container.
+# Com LF o interpretador tropeca em label e goto, entao aqui vale CRLF.
+*.bat  text eol=crlf
+
 *.jar binary
 *.zip binary
 *.tar.gz binary
